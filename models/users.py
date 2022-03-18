@@ -11,7 +11,7 @@ class User(BaseModel):
     hashed_password: str
     is_company: bool
     created_at: datetime.datetime
-    updated_at: datetime.datetime
+    update_at: datetime.datetime
 
 
 class UserIn(BaseModel):
@@ -21,8 +21,8 @@ class UserIn(BaseModel):
     password2: str
     is_company: bool = False
 
-    # @validator("password2")
-    # def password_match(clc, v, values):
-    #     if 'password' in values and v != values['password']:
-    #         raise ValueError('passwords dont match')
-    #     return v
+    @validator('password2')
+    def passwords_match(cls, v, values, **kwargs):
+        if 'password' in values and v != values['password']:
+            raise ValueError('passwords do not match')
+        return v

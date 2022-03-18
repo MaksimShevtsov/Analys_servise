@@ -9,6 +9,8 @@ uvicorn = "*"
 sqlalchemy = "*"
 psycopg2-binary = "*"
 passlib = "*"
+bcrypt = "*"
+jose = "*"
 
 [dev-packages]
 
@@ -20,3 +22,6 @@ extras = [ "postgresql",]
 
 [packages.pydantic]
 extras = [ "email",]
+
+[packages.python-jose]
+extras = [ "cryptography",]

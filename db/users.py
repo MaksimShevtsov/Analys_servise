@@ -11,5 +11,5 @@ users = sqlalchemy.Table(
     sqlalchemy.Column("hashed_password", sqlalchemy.String),
     sqlalchemy.Column("is_company", sqlalchemy.Boolean),
     sqlalchemy.Column("created_at", sqlalchemy.DateTime, default=datetime.datetime.utcnow()),
-    sqlalchemy.Column("updated_at", sqlalchemy.DateTime, default=datetime.datetime.utcnow()),
+    sqlalchemy.Column("update_at", sqlalchemy.DateTime, default=datetime.datetime.utcnow()),
 )

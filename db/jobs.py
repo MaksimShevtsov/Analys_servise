@@ -13,5 +13,5 @@ jobs = sqlalchemy.Table(
     sqlalchemy.Column("salary_to", sqlalchemy.Integer),
     sqlalchemy.Column("is_active", sqlalchemy.Boolean),
     sqlalchemy.Column("created_at", sqlalchemy.DateTime, default=datetime.datetime.utcnow()),
-    sqlalchemy.Column("updated_at", sqlalchemy.DateTime, default=datetime.datetime.utcnow()),
+    sqlalchemy.Column("update_at", sqlalchemy.DateTime, default=datetime.datetime.utcnow()),
 )
