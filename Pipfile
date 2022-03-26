@@ -11,6 +11,8 @@ psycopg2-binary = "*"
 passlib = "*"
 bcrypt = "*"
 jose = "*"
+jinja2 = "*"
+python-multipart = "*"
 
 [dev-packages]
 

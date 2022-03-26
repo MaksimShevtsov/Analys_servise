@@ -24,7 +24,6 @@ class UserRepository(BaseRepository):
             name=u.name,
             email=u.email,
             hashed_password=hash_password(u.password),
-            is_company=u.is_company,
             created_at=datetime.datetime.utcnow(),
             update_at=datetime.datetime.utcnow(),
         )
@@ -40,7 +39,6 @@ class UserRepository(BaseRepository):
             name=u.name,
             email=u.email,
             hashed_password=hash_password(u.password2),
-            is_company=u.is_company,
             created_at=datetime.datetime.utcnow(),
             update_at=datetime.datetime.utcnow(),
         )
@@ -53,6 +51,13 @@ class UserRepository(BaseRepository):
 
     async def get_by_email(self, email: str) -> User:
         query = users.select().where(users.c.email==email)
+        user = await self.database.fetch_one(query)
+        if user is None:
+            return None
+        return User.parse_obj(user)
+
+    async def get_by_name(self, name: str) -> User:
+        query = users.select().where(users.c.name==name)
         user = await self.database.fetch_one(query)
         if user is None:
             return None

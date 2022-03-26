@@ -1,12 +1,18 @@
 from fastapi import FastAPI
 from db.base import database
-from endpionts import users, auth, jobs
+from fastapi.staticfiles import StaticFiles
+
+from endpionts import users, auth, jobs, home
 import uvicorn
 
 app = FastAPI(title="Analys platform")
-app.include_router(users.router, prefix="/users", tags=['users'])
-app.include_router(auth.router, prefix="/auth", tags=["auth"])
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(home.router, prefix="/home", tags=['home'])
+app.include_router(users.router, prefix="/sign_up", tags=['users'])
+app.include_router(auth.router, prefix="/login", tags=["auth"])
 app.include_router(jobs.router, prefix="/jobs", tags=["jobs"])
+
 
 @app.on_event("startup")
 async def startup():
