@@ -1,5 +1,9 @@
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status, Request,  Form
+
+from asyncpg import UniqueViolationError
+from fastapi import APIRouter, Depends, HTTPException, status, Request
+
+
 from repositories.users import UserRepository
 from models.users import User, UserIn
 from .depends import get_user_repository, get_current_user
@@ -22,9 +26,22 @@ async def read_users(request: Request,
 
 
 @router.post("/", response_model=User)
-async def create_user(user: UserIn = Depends(UserIn.as_form),
-                      users: UserRepository = Depends(get_user_repository)):
-    return await users.create(u=user)
+async def create_user(
+        request: Request,
+        user: UserIn = Depends(UserIn.as_form),
+        users: UserRepository = Depends(get_user_repository)):
+    if user:
+        try:
+            await users.create(u=user)
+            return templates.TemplateResponse(link, {"request": request,
+                                                     'msg': 'User created please <a href="/login">login</a>',
+                                                     'success': True})
+        except UniqueViolationError:
+            return templates.TemplateResponse(link, {"request": request,
+                                                     'msg': 'Username or email already registered',
+                                                     'success': False})
+    else:
+        return templates.TemplateResponse(link)
 
 
 @router.patch("/", response_model=User)
