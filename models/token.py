@@ -1,5 +1,4 @@
-from pydantic import BaseModel, EmailStr, constr
-from fastapi import Form
+from pydantic import BaseModel, EmailStr
 
 
 class Token(BaseModel):
@@ -7,14 +6,6 @@ class Token(BaseModel):
     token_type: str
 
 
-class LoginIn(BaseModel):
+class Login(BaseModel):
     email: EmailStr
     password: str
-
-    @classmethod
-    def as_form(
-            cls,
-            email: str = Form(...),
-            password: constr(min_length=8) = Form(...),
-    ):
-        return cls(email=email, password=password)

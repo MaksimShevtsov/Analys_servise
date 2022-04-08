@@ -1,9 +1,9 @@
 from databases import Database
 from sqlalchemy import create_engine, MetaData
-from core.config import DATABASE_URL
+from core.config import settings
 
-database = Database(DATABASE_URL)
+database = Database(settings.DATABASE_URL)
 metadata = MetaData()
 engine = create_engine(
-    DATABASE_URL
+    settings.DATABASE_URL
 )
