@@ -38,11 +38,17 @@
     <connection id="6ec57a48-42c0-4437-9167-1a9f543b2d00" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="6ec57a48-42c0-4437-9167-1a9f543b2d00" dataset="public.account_integrations" active-filter-id="d863b1dc-2f63-4d1c-81b2-a4e238d531f4">
+      <filter id="d863b1dc-2f63-4d1c-81b2-a4e238d531f4" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="6ec57a48-42c0-4437-9167-1a9f543b2d00" dataset="public.users" active-filter-id="EMPTY_FILTER">
       <filter id="b89773f7-3f7d-49b3-a84b-b8bca508dcad" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="=" value="1" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="6ec57a48-42c0-4437-9167-1a9f543b2d00" dataset="public.users_profils" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="6ec57a48-42c0-4437-9167-1a9f543b2d00" dataset="public.accounts_prof" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

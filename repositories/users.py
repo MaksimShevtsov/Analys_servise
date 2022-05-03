@@ -39,7 +39,6 @@ class UserRepository(BaseRepository):
             name=u.name,
             email=u.email,
             hashed_password=hash_password(u.password2),
-            is_company=u.is_company,
             created_at=datetime.datetime.utcnow(),
             updated_at=datetime.datetime.utcnow(),
         )

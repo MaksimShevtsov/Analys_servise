@@ -1,7 +1,7 @@
 from typing import Optional
-from fastapi import Request
 from fastapi import Depends, HTTPException, status
 from repositories.users import UserRepository
+from repositories.integrations import IntegrationsRepository
 from db.base import database
 from core.security import JWTBearer, decode_access_token
 from models.user import User
@@ -9,12 +9,17 @@ from api.utils import OAuth2PasswordBearerWithCookie
 
 oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="/login/token")
 
+
 def get_user_repository() -> UserRepository:
     return UserRepository(database)
 
 
+def get_integration_repository() -> IntegrationsRepository:
+    return IntegrationsRepository(database)
+
+
 async def get_current_user(users: UserRepository = Depends(get_user_repository),
-                           token: str = Depends(oauth2_scheme),
+                           token: Optional[str] = Depends(oauth2_scheme),
                            ) -> Optional[User]:
     cred_exception = HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Credentials are not valid")
     payload = decode_access_token(token)

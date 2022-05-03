@@ -1,12 +1,10 @@
 from typing import List
-
-from asyncpg import UniqueViolationError
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, HTTPException, status
 from repositories.users import UserRepository
 from models.user import User, UserIn
 from .depends import get_user_repository, get_current_user
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
+
 
 router = APIRouter()
 templates = Jinja2Templates(directory='templates')
